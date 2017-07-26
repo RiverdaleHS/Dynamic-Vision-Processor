@@ -6,7 +6,7 @@ import cv2
 # Input variables that will be command line args in a later release
 ROBOT_FILE_PATH = "robot.panda"
 
-# Global Variables are all stored in this dict
+# Global Variables are all storsed in this dict
 global_vars = {}
 
 # Print Dependency Versions
@@ -30,3 +30,10 @@ except:
     global_vars["RoboRio_Hostname"] = robot_hostname
 
 print("Successfully loaded robot file " + ROBOT_FILE_PATH + ", with hostname " + global_vars["RoboRio_Hostname"])
+
+#Load test images for later use
+testImage1 = cv2.imread('testImage-1.jpg',cv2.IMREAD_COLOR)
+testImage2 = cv2.imread('testImage-2.jpg',cv2.IMREAD_COLOR)
+testImage3 = cv2.imread('testImage-4.jpg',cv2.IMREAD_COLOR)
+testImage4 = cv2.imread('testImage-5.jpg',cv2.IMREAD_COLOR)
+testImage5 = cv2.imread('testImage-8.jpg',cv2.IMREAD_COLOR)
