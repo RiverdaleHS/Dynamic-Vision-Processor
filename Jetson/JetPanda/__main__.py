@@ -37,3 +37,9 @@ testImage2 = cv2.imread('testImage-2.jpg',cv2.IMREAD_COLOR)
 testImage3 = cv2.imread('testImage-4.jpg',cv2.IMREAD_COLOR)
 testImage4 = cv2.imread('testImage-5.jpg',cv2.IMREAD_COLOR)
 testImage5 = cv2.imread('testImage-8.jpg',cv2.IMREAD_COLOR)
+
+#Generate contours for testImage-1.jpg
+testImage1g = cv2.cvtColor(testImage1, cv2.COLOR_BGR2GRAY)
+ret, thresh = cv2.threshold(testImage1g, 127, 255, 0)
+testimage1b, contours, hierarchy = cv2.findContours(thresh, cv2.RETsR_TREE, cv2.CHAIN_APPROX_SIMPLE)
+cv2.drawContours(testimage1b, contours, -1, (0,255,0), 3)
