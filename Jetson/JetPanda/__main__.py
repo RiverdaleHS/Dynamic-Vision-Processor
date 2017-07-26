@@ -2,6 +2,7 @@ import sys
 
 sys.path.append('/usr/local/lib/python2.7/site-packages')
 import cv2
+import numpy as np
 
 # Input variables that will be command line args in a later release
 ROBOT_FILE_PATH = "robot.panda"
