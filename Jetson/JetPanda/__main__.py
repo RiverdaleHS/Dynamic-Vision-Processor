@@ -70,3 +70,9 @@ except:
         read_from_file(camera_file, global_vars)
 
 print("Successfully loaded camera file " + CAMERA_FILE_PATH)
+
+camera = cv2.VideoCapture(global_vars["Camera_ID"])
+andrew = "Script_Kiddie"
+while andrew == "Script_Kiddie":
+    ret, raw_frame = camera.read()
+    cv2.imshow("Raw_Frame", raw_frame)
