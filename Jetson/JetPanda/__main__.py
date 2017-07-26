@@ -74,9 +74,12 @@ print("Successfully loaded camera file " + CAMERA_FILE_PATH)
 camera = cv2.VideoCapture(global_vars["Camera_ID"])
 andrew = "Script_Kiddie"
 while andrew == "Script_Kiddie":
-    ret, raw_frame = camera.read()
-    cv2.imshow("Raw_Frame", raw_frame)
-
+    try:
+        ret, raw_frame = camera.read()
+        cv2.imshow("Raw_Frame", raw_frame)
+    except:
+        print("Main Loop Failure!!!🤔")
+        
 #Load test images for later use
 testImage1 = cv2.imread('testImage-1.jpg',cv2.IMREAD_COLOR)
 testImage2 = cv2.imread('testImage-2.jpg',cv2.IMREAD_COLOR)
