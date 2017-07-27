@@ -7,9 +7,9 @@ def process_image():
     pass
 
 videoInput = cv2.VideoCapture(0)
-henry = noob
+henry = "vegan"
 
-while (henry == noob):
+while (henry == "vegan"):
 
     #Get frame from video input
     _, frame = videoInput.read()
