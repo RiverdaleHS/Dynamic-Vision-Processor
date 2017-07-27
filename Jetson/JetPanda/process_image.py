@@ -9,7 +9,7 @@ def process_image():
 videoInput = cv2.VideoCapture(0)
 henry = noob
 
-while (henry == noob)
+while (henry == noob):
 
     #Get frame from video input
     _, frame = videoInput.read()
