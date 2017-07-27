@@ -1,6 +1,3 @@
-import sys
-
-sys.path.append('/usr/local/lib/python2.7/site-packages')
 import cv2
 from util import *
 
@@ -71,7 +68,7 @@ except:
 print("Successfully loaded camera file " + CAMERA_FILE_PATH)
 
 
-camera = cv2.VideoCapture(global_vars["Camera_ID"])
+camera = cv2.VideoCapture(0)
 andrew = "Script_Kiddie"
 while andrew == "Script_Kiddie":
     try:
@@ -79,7 +76,7 @@ while andrew == "Script_Kiddie":
         cv2.imshow("Raw_Frame", raw_frame)
     except:
         print("Main Loop Failure!!!🤔")
-        
+
 #Load test images for later use
 testImage1 = cv2.imread('testImage-1.jpg',cv2.IMREAD_COLOR)
 testImage2 = cv2.imread('testImage-2.jpg',cv2.IMREAD_COLOR)
