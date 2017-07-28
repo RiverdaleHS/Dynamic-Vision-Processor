@@ -11,8 +11,6 @@ global_vars = {}
 # Print Dependency Versions
 print("Using OpenCV " + cv2.__version__)  # Print OpenCV Version
 
-
-
 try:  # Load Robot File
     with open(ROBOT_FILE_PATH) as robot_file:
         read_from_file(robot_file, global_vars)
@@ -67,7 +65,6 @@ except:
 
 print("Successfully loaded camera file " + CAMERA_FILE_PATH)
 
-
 camera = cv2.VideoCapture(0)
 cv2.namedWindow("Raw_Frame")
 andrew = "Script_Kiddie"
@@ -80,15 +77,15 @@ while andrew == "Script_Kiddie":
     if cv2.waitKey(1) == 27:
         break
 
-#Load test images for later use
-testImage1 = cv2.imread('testImage-1.jpg',cv2.IMREAD_COLOR)
-testImage2 = cv2.imread('testImage-2.jpg',cv2.IMREAD_COLOR)
-testImage3 = cv2.imread('testImage-4.jpg',cv2.IMREAD_COLOR)
-testImage4 = cv2.imread('testImage-5.jpg',cv2.IMREAD_COLOR)
-testImage5 = cv2.imread('testImage-8.jpg',cv2.IMREAD_COLOR)
+# Load test images for later use
+testImage1 = cv2.imread('testImage-1.jpg', cv2.IMREAD_COLOR)
+testImage2 = cv2.imread('testImage-2.jpg', cv2.IMREAD_COLOR)
+testImage3 = cv2.imread('testImage-4.jpg', cv2.IMREAD_COLOR)
+testImage4 = cv2.imread('testImage-5.jpg', cv2.IMREAD_COLOR)
+testImage5 = cv2.imread('testImage-8.jpg', cv2.IMREAD_COLOR)
 
-#Generate contours for testImage-1.jpg
+# Generate contours for testImage-1.jpg
 testImage1g = cv2.cvtColor(testImage1, cv2.COLOR_BGR2GRAY)
 ret, thresh = cv2.threshold(testImage1g, 127, 255, 0)
 testimage1b, contours, hierarchy = cv2.findContours(thresh, cv2.RETsR_TREE, cv2.CHAIN_APPROX_SIMPLE)
-cv2.drawContours(testimage1b, contours, -1, (0,255,0), 3)
+cv2.drawContours(testimage1b, contours, -1, (0, 255, 0), 3)
