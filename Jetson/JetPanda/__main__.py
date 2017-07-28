@@ -69,6 +69,7 @@ print("Successfully loaded camera file " + CAMERA_FILE_PATH)
 
 
 camera = cv2.VideoCapture(0)
+cv2.namedWindow("Raw_Frame")
 andrew = "Script_Kiddie"
 while andrew == "Script_Kiddie":
     try:
@@ -76,6 +77,8 @@ while andrew == "Script_Kiddie":
         cv2.imshow("Raw_Frame", raw_frame)
     except:
         print("Main Loop Failure!!!🤔")
+    if cv2.waitKey(1) == 27:
+        break
 
 #Load test images for later use
 testImage1 = cv2.imread('testImage-1.jpg',cv2.IMREAD_COLOR)
