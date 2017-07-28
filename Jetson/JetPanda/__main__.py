@@ -1,6 +1,6 @@
 import cv2
 from util import *
-
+from process_frame import *
 # Input variables that will be command line args in a later release
 ROBOT_FILE_PATH = "robot.panda"
 CAMERA_FILE_PATH = "camera.panda"
@@ -72,6 +72,7 @@ while True:
     try:
         ret, raw_frame = camera.read()
         cv2.imshow("Raw_Frame", raw_frame)
+        process_frame(raw_frame, global_vars)
     except:
         print("Main Loop Failure!!!🤔")
     if cv2.waitKey(1) == 27:
