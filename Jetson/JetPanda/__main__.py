@@ -66,12 +66,10 @@ except:
 print("Successfully loaded camera file " + CAMERA_FILE_PATH)
 
 camera = cv2.VideoCapture(0)
-cv2.namedWindow("Raw_Frame")
 
 while True:
     try:
         ret, raw_frame = camera.read()
-        cv2.imshow("Raw_Frame", raw_frame)
         process_frame(raw_frame, global_vars)
     except:
         print("Main Loop Failure!!!🤔")
