@@ -66,7 +66,6 @@ except:
 print("Successfully loaded camera file " + CAMERA_FILE_PATH)
 
 camera = cv2.VideoCapture(0)
-camera.set(cv2.cv.CV_CAP_PROP_EXPOSURE,-99)
 cv2.namedWindow("Raw_Frame")
 
 while True:
