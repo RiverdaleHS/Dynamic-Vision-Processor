@@ -67,11 +67,13 @@ print("Successfully loaded camera file " + CAMERA_FILE_PATH)
 
 camera = cv2.VideoCapture(0)
 cv2.namedWindow("Raw_Frame")
-andrew = "Script_Kiddie"
-while andrew == "Script_Kiddie":
+henry = "Vegan"
+while henry == "Vegan":
     try:
         ret, raw_frame = camera.read()
         cv2.imshow("Raw_Frame", raw_frame)
+        #This will set the camera's exposure to be low af
+        camera.set(cv2.cv.CV_CAP_PROP_EXPOSURE,-99)
     except:
         print("Main Loop Failure!!!🤔")
     if cv2.waitKey(1) == 27:
