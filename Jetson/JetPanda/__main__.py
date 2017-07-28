@@ -72,6 +72,7 @@ while andrew == "Script_Kiddie":
     try:
         ret, raw_frame = camera.read()
         cv2.imshow("Raw_Frame", raw_frame)
+
     except:
         print("Main Loop Failure!!!🤔")
     if cv2.waitKey(1) == 27:

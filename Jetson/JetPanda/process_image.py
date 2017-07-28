@@ -1,37 +1,6 @@
-import sys
-sys.path.append('/usr/local/lib/python2.7/site-packages')
 import cv2
-import numpy as np
 
-def process_image():
-    pass
-
-videoInput = cv2.VideoCapture(0)
-henry = "vegan"
-
-while (henry == "vegan"):
-
-    #Get frame from video input
-    _, frame = videoInput.read()
-
-    #Convert RGB frame to HSV
+def process_frame(frame, vars):
     hsv = cv2.cvtColor(frame, cv2.COLOR_BGR2HSV)
-
-    #Display frame as RGB image
-    cv2.imshow('frame', frame)
-
-    #Process the image and create mask
-    #Define upper and lower bounds for mask
-    lowGreenBound = np.array([80, 155, 155])
-    highGreenBound = np.array([120, 255, 255])
-
-    mask = cv2.inRange(hsv, lowGreenBound, highGreenBound)
-
-    #Show mask
-    cv2.imshow('mask',mask)
-    cv2.imshow('res',res)
-
-    k = cv2.waitKey(5) & 0xFF
-
-    if k == 27:
-        break
+    binary = cv2.inRange(hsv, (10, 10, 10), (200, 200, 200))
+    cv2.imshow(binary)
