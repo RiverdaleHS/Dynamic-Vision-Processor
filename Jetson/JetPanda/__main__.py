@@ -64,7 +64,7 @@ if isInt(image_source):
     while True:
         try:
             ret, raw_frame = camera.read()
-            process_frame(raw_frame, global_vars)
+            process_frame(raw_frame, (0,0,0), (150, 180, 160), "Target") #PLACE HOLDERS
         except:
             print("Main Loop Failure!!!🤔")
         if cv2.waitKey(1) == 27:
