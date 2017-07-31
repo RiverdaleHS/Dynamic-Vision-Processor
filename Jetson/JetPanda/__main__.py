@@ -56,7 +56,7 @@ print("Successfully loaded config file " + config_file_path)
 print("Using OpenCV " + cv2.__version__)  # Print OpenCV Version
 
 
-if isInt(image_source)
+if isInt(image_source):
     #image_source = int(image_source)
     # Camera Loop!
     print("Loading Camera " + image_source)
