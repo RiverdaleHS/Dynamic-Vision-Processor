@@ -1,3 +1,4 @@
+import numpy as np
 import cv2
 import sys
 from util import *
@@ -64,11 +65,12 @@ if isInt(image_source):
     while True:
         try:
             ret, raw_frame = camera.read()
-            cv2.imshow(raw_frame)
+            cv2.imshow("Raw", raw_frame)
             #process_frame(raw_frame, (0,0,0), (150, 180, 160), "Target") #PLACE HOLDERS
         except:
             print("Main Loop Failure!!!🤔")
-        if cv2.waitKey(1) == 27:
+        if cv2.waitKey(1) & 0xFF == ord('q'):
+            camera.release()
             break
 else:
     # Load one image and display in loop
@@ -81,3 +83,4 @@ else:
             print("Failed to Load Image!!!🤔")
         if cv2.waitKey(1) == 27:
             break
+cv2.destroyAllWindows()
