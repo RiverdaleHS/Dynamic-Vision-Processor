@@ -60,11 +60,12 @@ if isInt(image_source):
     image_source = int(image_source)
     # Camera Loop!
     print("Loading Camera " + image_source)
-    camera = cv2.VideoCapture(0)
+    camera = cv2.VideoCapture(image_source)
     while True:
         try:
             ret, raw_frame = camera.read()
-            process_frame(raw_frame, (0,0,0), (150, 180, 160), "Target") #PLACE HOLDERS
+            cv2.imshow(raw_frame)
+            #process_frame(raw_frame, (0,0,0), (150, 180, 160), "Target") #PLACE HOLDERS
         except:
             print("Main Loop Failure!!!🤔")
         if cv2.waitKey(1) == 27:
