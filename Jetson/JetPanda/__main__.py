@@ -54,11 +54,13 @@ print("Successfully loaded config file " + config_file_path)
 
 # Print Dependency Versions
 print("Using OpenCV " + cv2.__version__)  # Print OpenCV Version
-if isinstance(image_source, int):
+
+
+try:
     image_source = int(image_source)
     # Camera Loop!
     print("Loading Camera " + image_source)
-    camera = cv2.VideoCapture(0)
+    camera = cv2.VideoCapture(image_source)
     while True:
         try:
             ret, raw_frame = camera.read()
@@ -67,10 +69,10 @@ if isinstance(image_source, int):
             print("Main Loop Failure!!!🤔")
         if cv2.waitKey(1) == 27:
             break
-else:
+except:
     # Load one image and display in loop
     while True:
-        print("Loading Image" + sys.argv[2])
+        print("Loading Image " + sys.argv[2])
         try:
             raw_frame = cv2.imread(sys.argv[2])
             process_frame(raw_frame)
