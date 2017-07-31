@@ -60,7 +60,7 @@ print("Using OpenCV " + cv2.__version__)  # Print OpenCV Version
 if isInt(image_source):
     image_source = int(image_source)
     # Camera Loop!
-    print("Loading Camera " + image_source)
+    print("Loading Camera " + str(image_source))
     camera = cv2.VideoCapture(image_source)
     while True:
         try:
