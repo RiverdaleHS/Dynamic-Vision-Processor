@@ -1,9 +1,14 @@
 import cv2
+import sys
 from util import *
 from process_frame import *
+
+#Python3 __main__.py config.py
+
 # Input variables that will be command line args in a later release
 ROBOT_FILE_PATH = "robot.panda"
 CAMERA_FILE_PATH = "camera.panda"
+
 
 # Global Variables are all stored in this dict
 global_vars = {}
