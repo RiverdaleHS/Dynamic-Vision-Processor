@@ -65,7 +65,7 @@ if isInt(image_source):
     while True:
         try:
             ret, raw_frame = camera.read()
-            process_frame(raw_frame, (0,0,0), (150, 180, 160), "Target") #PLACE HOLDERS
+            process_frame(raw_frame, 0, 0, "Target") #PLACE HOLDERS
         except Exception as e:
             print("Main Loop Failure!!!🤔")
             print(e)
