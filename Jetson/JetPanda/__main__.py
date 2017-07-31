@@ -57,7 +57,7 @@ print("Using OpenCV " + cv2.__version__)  # Print OpenCV Version
 
 
 if isInt(image_source):
-    #image_source = int(image_source)
+    image_source = int(image_source)
     # Camera Loop!
     print("Loading Camera " + image_source)
     camera = cv2.VideoCapture(image_source)
@@ -71,8 +71,8 @@ if isInt(image_source):
             break
 else:
     # Load one image and display in loop
+    print("Loading Image " + sys.argv[2])
     while True:
-        print("Loading Image " + sys.argv[2])
         try:
             raw_frame = cv2.imread(sys.argv[2])
             process_frame(raw_frame)
