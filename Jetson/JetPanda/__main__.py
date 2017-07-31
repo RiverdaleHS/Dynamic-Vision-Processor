@@ -5,14 +5,13 @@ from process_frame import *
 
 global_vars = {}
 
-#attempt to load commandline args and if they are not there correct the user
+# attempt to load commandline args and if they are not there correct the user
 try:
     config_file_path = sys.argv[1]
     image_source = sys.argv[2]
 except:
     print("Usage: python3 __main__.py config_file_path camera_id_or_image_path")
     exit(-0)
-
 
 try:  # Load Config File
     with open(config_file_path) as config_file:
@@ -29,7 +28,7 @@ except:
     # Focal Lenght
     focal_length = input("What is the focal length of this camera?")
     config_file.write("Camera_Focal_Length|" + focal_length + "\n")
-    # Heigth off of Ground
+    # Height off of Ground
     ground_height = input("How far off the ground is this camera?")
     config_file.write("Camera_Ground_Height|" + ground_height + "\n")
     # HSV
@@ -55,10 +54,10 @@ print("Successfully loaded config file " + config_file_path)
 
 # Print Dependency Versions
 print("Using OpenCV " + cv2.__version__)  # Print OpenCV Version
-try:
+if isinstance(image_source, int):
     image_source = int(image_source)
-    #Camera Loop!
-    print("Loading Camera " + sys.argv[2])
+    # Camera Loop!
+    print("Loading Camera " + image_source)
     camera = cv2.VideoCapture(0)
     while True:
         try:
@@ -68,8 +67,8 @@ try:
             print("Main Loop Failure!!!🤔")
         if cv2.waitKey(1) == 27:
             break
-except:
-    #Load one image and display in loop
+else:
+    # Load one image and display in loop
     while True:
         print("Loading Image" + sys.argv[2])
         try:
@@ -79,5 +78,3 @@ except:
             print("Failed to Load Image!!!🤔")
         if cv2.waitKey(1) == 27:
             break
-
-
