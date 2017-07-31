@@ -4,7 +4,15 @@ from util import *
 from process_frame import *
 
 global_vars = {}
-config_file_path = sys.argv[1]
+
+#attempt to load commandline args and if they are not there correct the user
+try:
+    config_file_path = sys.argv[1]
+    image_source = sys.argv[2]
+except:
+    print("Usage: python3 __main__.py config_file_path camera_id_or_image_path")
+    exit(-0)
+
 
 try:  # Load Config File
     with open(config_file_path) as config_file:
