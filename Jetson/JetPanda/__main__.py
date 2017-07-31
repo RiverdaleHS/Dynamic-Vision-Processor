@@ -60,7 +60,7 @@ if isInt(image_source):
     image_source = int(image_source)
     # Camera Loop!
     print("Loading Camera " + image_source)
-    camera = cv2.VideoCapture(image_source)
+    camera = cv2.VideoCapture(0)
     while True:
         try:
             ret, raw_frame = camera.read()
