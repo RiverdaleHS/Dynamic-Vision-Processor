@@ -66,7 +66,7 @@ if isInt(image_source):
         try:
             ret, raw_frame = camera.read()
             process_frame(raw_frame, (0,0,0), (150, 180, 160), "Target") #PLACE HOLDERS
-        except(Exception e):
+        except Exception as e:
             print("Main Loop Failure!!!🤔")
             print(e)
         if cv2.waitKey(1) & 0xFF == ord('q'):
