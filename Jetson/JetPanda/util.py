@@ -6,3 +6,10 @@ def read_from_file(file, output_dict):
         name_of_constant = data[0]
         constant = data[1]
         output_dict[name_of_constant] = constant
+
+def isInt(string):
+    try:
+        int(string)
+        return True
+    except:
+        return False
