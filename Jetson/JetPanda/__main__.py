@@ -77,11 +77,12 @@ if isInt(image_source):
 else:
     # Load one image and display in loop
     print("Loading Image " + sys.argv[2])
+    cv2.namedWindow("HSV_Range")
+    cv2.createTrackbar("test", "HSV_Range", 0, 180, trackbarValueDidChange)
     while True:
         try:
             #createHSVThreasholdTrackbars(global_vars)
-            cv2.namedWindow("HSV_Range")
-            cv2.createTrackbar("test", "HSV_Range", 0, 180, trackbarValueDidChange)
+            val = cv2.getTrackbarPos("test", "HSV_Range")
 
             raw_frame = cv2.imread(sys.argv[2])
             process_frame(raw_frame, (global_vars["min_hue"], global_vars["min_saturation"], global_vars["min_value"]),
