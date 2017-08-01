@@ -35,6 +35,7 @@ def readTrackbar(window, name):
 
 
 def createHSVThreasholdTrackbars(output_dict):
+    cv2.namedWindow("HSV_Range")
     createTrackbar("HSV_Range", "min_hue", 0, 180)
     createTrackbar("HSV_Range", "max_hue", 0, 180)
     createTrackbar("HSV_Range", "min_saturation", 0, 255)
