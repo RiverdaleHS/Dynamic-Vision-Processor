@@ -69,7 +69,7 @@ if isInt(image_source):
         except Exception as e:
             print("Main Loop Failure!!!🤔")
             print(e)
-        if cv2.waitKey(1) & 0xFF == ord('q'):
+        if cv2.waitKey(1) == 27:
             camera.release()
             break
 else:
