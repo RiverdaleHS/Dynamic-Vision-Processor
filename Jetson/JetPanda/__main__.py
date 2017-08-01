@@ -77,7 +77,6 @@ if isInt(image_source):
 else:
     # Load one image and display in loop
     print("Loading Image " + sys.argv[2])
-    createHSVThreasholdTrackbars(global_vars)
     while True:
         try:
 
