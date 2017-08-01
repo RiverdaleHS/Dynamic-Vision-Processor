@@ -10,9 +10,10 @@ def process_frame(frame, low_range, high_range, target):
 
     binary = cv2.inRange(hsv, low_range, high_range)
     # clean up binary frame
-    kernal = np.ones((16, 16), np.uint8)
-    morph_binary = cv2.morphologyEx(binary, cv2.MORPH_OPEN, kernal)
-
+    erode_kernal = np.ones((4, 4), np.uint8)
+    dilate_kernal = np.ones((4, 4), np.uint8)
+    morph_binary = cv2.erode(binary, erode_kernal, iterations=1)
+    morph_binary = cv2.dilate(binary, dilate_kernal, iterations=1)
 
     #_, contours, hierarchy = cv2.findContours(binary, cv2.RETR_TREE, cv2.CHAIN_APPROX_SIMPLE)
     #cv2.drawContours(frame, contours, -1, (255, 140, 0), -1)
