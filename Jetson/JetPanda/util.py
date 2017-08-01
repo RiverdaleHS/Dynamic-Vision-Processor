@@ -5,7 +5,10 @@ def read_from_file(file, output_dict):
         data = line.split("|")
         name_of_constant = data[0]
         constant = data[1]
-        output_dict[name_of_constant] = constant
+        if isInt(constant):
+            output_dict[name_of_constant] = int(constant)
+        else:
+            output_dict[name_of_constant] = constant
 
 def isInt(string):
     try:
