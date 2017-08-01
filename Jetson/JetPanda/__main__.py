@@ -81,8 +81,7 @@ else:
         try:
             #createHSVThreasholdTrackbars(global_vars)
             cv2.namedWindow("HSV_Range")
-            createTrackbar("HSV_Range", "min_hue", 0, 180)
-
+            cv2.createTrackbar("test", "HSV_Range", 0, 180, trackbarValueDidChange)
 
             raw_frame = cv2.imread(sys.argv[2])
             process_frame(raw_frame, (global_vars["min_hue"], global_vars["min_saturation"], global_vars["min_value"]),
