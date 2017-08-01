@@ -12,7 +12,7 @@ def process_frame(frame, low_range, high_range, target):
     morph_binary = binary
     # clean up binary frame
     kernal = np.ones((16, 16), np.uint8)
-    cv2.dilate(morph_binary, kernal, iterations=1)
+    morph_binary = cv2.dilate(morph_binary, kernal, iterations=1)
 
 
     #_, contours, hierarchy = cv2.findContours(binary, cv2.RETR_TREE, cv2.CHAIN_APPROX_SIMPLE)
