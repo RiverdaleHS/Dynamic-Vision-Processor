@@ -1,10 +1,10 @@
 RoboRIO_Hostname|133
 Camera_ID|41
-Camera_Focal_Length|432
+Camera_Focal_Length|33
 Camera_Ground_Height|34
-min_hue|43234
-max_hue|2
-min_saturation|34
-max_saturation|234
-min_value|423234
-max_value|423
+min_hue|70
+max_hue|180
+min_saturation|0
+max_saturation|255
+min_value|180
+max_value|255
