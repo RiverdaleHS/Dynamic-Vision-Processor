@@ -26,7 +26,7 @@ def createTrackbar(window, name, min, max):
     cv2.createTrackbar(name, window, min, max, trackbarValueDidChange)
 
 
-def trackbarValueDidChange():
+def trackbarValueDidChange(x):
     pass
 
 
