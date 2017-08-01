@@ -65,7 +65,9 @@ if isInt(image_source):
     while True:
         try:
             ret, raw_frame = camera.read()
-            process_frame(raw_frame, (0, 0, 0), (180, 255, 255), "Target")  # PLACE HOLDERS
+            process_frame(raw_frame, (global_vars["min_hue"], global_vars["min_saturation"], global_vars["min_value"]),
+                          (global_vars["max_hue"], global_vars["max_saturation"], global_vars["max_value"]),
+                          "Target")  # PLACE HOLDERS
         except Exception as e:
             print("Main Loop Failure!!!🤔")
             print(e)
@@ -78,7 +80,9 @@ else:
     while True:
         try:
             raw_frame = cv2.imread(sys.argv[2])
-            process_frame(raw_frame, (0, 0, 0), (180, 255, 255), "Target")  # PLACE HOLDERS
+            process_frame(raw_frame, (global_vars["min_hue"], global_vars["min_saturation"], global_vars["min_value"]),
+                          (global_vars["max_hue"], global_vars["max_saturation"], global_vars["max_value"]),
+                          "Target")  # PLACE HOLDERS
         except Exception as e:
             print("Failed to Load Image!!!🤔")
             print(e)
