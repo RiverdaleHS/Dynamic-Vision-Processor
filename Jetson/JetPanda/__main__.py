@@ -86,6 +86,7 @@ else:
         except Exception as e:
             print("Failed to Load Image!!!🤔")
             print(e)
+            break
         if cv2.waitKey(1) == 27:
             break
 cv2.destroyAllWindows()
