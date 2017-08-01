@@ -78,7 +78,7 @@ else:
     while True:
         try:
             raw_frame = cv2.imread(sys.argv[2])
-            process_frame(raw_frame)
+            process_frame(raw_frame, 0, 0, "Target")  # PLACE HOLDERS
         except:
             print("Failed to Load Image!!!🤔")
         if cv2.waitKey(1) == 27:
