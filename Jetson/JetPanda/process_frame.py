@@ -36,7 +36,7 @@ def process_frame(frame, low_range, high_range, targets):
             perimeter_over_area = perimeter/area
             # 0.55 - 0.5 = 0.05
             if (perimeter_over_area - target.perimeter_over_area) < target.perimeter_over_area_tolerence:
-                matches.append(target)
+                matches.append(filtered_contour)
 
             if target.find_one:
                 # determine the best of the found targets
