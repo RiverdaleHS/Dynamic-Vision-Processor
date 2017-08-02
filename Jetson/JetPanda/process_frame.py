@@ -48,7 +48,7 @@ def process_frame(frame, low_range, high_range, targets):
 
     cv2.drawContours(frame, contours, -1, (0, 0, 255), -1)
     cv2.drawContours(frame, filtered_contours, -1, (255, 0, 0), -1)
-    for target in target:
+    for target in targets:
         cv2.drawContours(frame, target.contours, -1, (0, 0, 255), -1)
 
 
