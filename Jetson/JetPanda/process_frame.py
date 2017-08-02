@@ -22,7 +22,7 @@ def process_frame(frame, low_range, high_range, targets):
     for contour in contours:
         # Eliminate small contours based on a fit line.  All targets should be level to the ground
         [vx, vy, x, y] = cv2.fitLine(contour, cv2.DIST_L2, 0, 0, 0.01, 0.01)
-        if math.degrees(math.atan2(vy - y, vx - x)) > 45:
+        if math.degrees(math.atan2(vy - y, vx - x)) < 90:
             targets.append(contour)
 
     for filtered_contour in filtered_contours:
@@ -35,4 +35,3 @@ def process_frame(frame, low_range, high_range, targets):
     cv2.imshow("frame", frame)
     cv2.imshow("binary", binary)
     cv2.imshow("erode binary", erode_binary)
-    cv2.imshow("open binary", open_binary)
