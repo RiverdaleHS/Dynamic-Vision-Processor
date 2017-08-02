@@ -21,10 +21,7 @@ def process_frame(frame, low_range, high_range, targets):
     # Find Targets
     for contour in contours:
         # Eliminate small contours based on a fit line.  All targets should be level to the ground
-        row, cols = frame[:2]
         [vx, vy, x, y] = cv2.fitLine(contour, cv2.DIST_L2, 0, 0, 0.01, 0.01)
-        left = int((-x*vy/vx) + y)
-        right = int(((cols-x)*vy/vx) + y)
         if math.degrees(math.atan2(vy - y, vx - x)) > 45:
             targets.append(contour)
 
