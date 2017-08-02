@@ -25,7 +25,8 @@ def process_frame(frame, low_range, high_range, targets):
         [vx, vy, x, y] = cv2.fitLine(contour, cv2.DIST_L2, 0, 0, 0.01, 0.01)
         area = math.degrees(math.atan2(vy - y, vx - x))
         if math.degrees(math.atan2(vy - y, vx - x)) < -150:
-            filtered_contours.append(contour)
+            if cv2.contourArea(contour) > 50:
+                filtered_contours.append(contour)
 
 
     for filtered_contour in filtered_contours:
