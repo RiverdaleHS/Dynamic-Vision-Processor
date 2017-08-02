@@ -77,11 +77,11 @@ if isInt(image_source):
             break
 else:
     # Load one image and display in loop
-    print("Loading Image " + sys.argv[2])
+    print("Loading Image " + image_source)
     while True:
         try:
 
-            raw_frame = cv2.imread(sys.argv[2])
+            raw_frame = cv2.imread(image_source)
             process_frame(raw_frame, (global_vars["min_hue"], global_vars["min_saturation"], global_vars["min_value"]),
                           (global_vars["max_hue"], global_vars["max_saturation"], global_vars["max_value"]),
                           [target(0.5, 0.5, False)])  # PLACE HOLDERS
