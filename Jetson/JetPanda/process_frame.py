@@ -31,7 +31,7 @@ def process_frame(frame, low_range, high_range, targets):
             perimeter = cv2.arcLength(contour, True)
 
 
-    cv2.drawContours(frame, contours, -1, (255, 140, 0), -1)
+    cv2.drawContours(frame, filtered_contours, -1, (255, 140, 0), -1)
     cv2.imshow("frame", frame)
     cv2.imshow("binary", binary)
     cv2.imshow("erode binary", erode_binary)
