@@ -84,7 +84,7 @@ else:
             raw_frame = cv2.imread(sys.argv[2])
             process_frame(raw_frame, (global_vars["min_hue"], global_vars["min_saturation"], global_vars["min_value"]),
                           (global_vars["max_hue"], global_vars["max_saturation"], global_vars["max_value"]),
-                          "Target")  # PLACE HOLDERS
+                          [target(0.5, 0.5, False)])  # PLACE HOLDERS
 
 
         except Exception as e:
