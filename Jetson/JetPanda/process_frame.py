@@ -2,6 +2,7 @@ import cv2
 import numpy as np
 import math
 
+
 def process_frame(frame, low_range, high_range, targets):
     hsv = cv2.cvtColor(frame, cv2.COLOR_BGR2HSV)
     # Hue 0-180
@@ -39,9 +40,9 @@ def process_frame(frame, low_range, high_range, targets):
 
             if target.find_one:
                 # determine the best of the found targets
-                target.add_contours([matches[0]])
+                target.set_contours([matches[0]])
             else:
-                target.add_contours(matches)
+                target.set_contours(matches)
 
 
 
