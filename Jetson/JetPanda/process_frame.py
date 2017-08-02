@@ -2,7 +2,7 @@ import cv2
 import numpy as np
 
 
-def process_frame(frame, low_range, high_range, target):
+def process_frame(frame, low_range, high_range, targets):
     hsv = cv2.cvtColor(frame, cv2.COLOR_BGR2HSV)
     # Hue 0-180
     # Saturation 0-255
@@ -16,6 +16,22 @@ def process_frame(frame, low_range, high_range, target):
     open_binary = cv2.dilate(binary, dilate_kernal, iterations=1)
 
     _, contours, hierarchy = cv2.findContours(open_binary, cv2.RETR_TREE, cv2.CHAIN_APPROX_SIMPLE)
+
+
+    # Find Targets
+    for contour in contours:
+        # Eliminate small contours based on a fit line.  All targets should be level to the ground
+        row, cols = frame[:2]
+        [vx, vy, x, y] = cv2.fitLine(contour, cv2.DIST_L2, 0, 0, 0.01, 0.01)
+        left = int((-x*vy/vx) + y)
+        right = int(((cols-x)*vy/vx) + y)
+        cv2.line(frame, (cols - 1, right), (0, left), (0, 255, 0), 2)
+
+        for target in targets:
+            area = cv2.contourArea(contour)
+            perimeter = cv2.arcLength(contour, True)
+
+
     cv2.drawContours(frame, contours, -1, (255, 140, 0), -1)
     cv2.imshow("frame", frame)
     cv2.imshow("binary", binary)
