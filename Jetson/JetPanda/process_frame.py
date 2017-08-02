@@ -1,6 +1,6 @@
 import cv2
 import numpy as np
-
+import math
 
 def process_frame(frame, low_range, high_range, targets):
     hsv = cv2.cvtColor(frame, cv2.COLOR_BGR2HSV)
@@ -17,7 +17,7 @@ def process_frame(frame, low_range, high_range, targets):
 
     _, contours, hierarchy = cv2.findContours(open_binary, cv2.RETR_TREE, cv2.CHAIN_APPROX_SIMPLE)
 
-
+    filtered_contours = []
     # Find Targets
     for contour in contours:
         # Eliminate small contours based on a fit line.  All targets should be level to the ground
@@ -25,8 +25,10 @@ def process_frame(frame, low_range, high_range, targets):
         [vx, vy, x, y] = cv2.fitLine(contour, cv2.DIST_L2, 0, 0, 0.01, 0.01)
         left = int((-x*vy/vx) + y)
         right = int(((cols-x)*vy/vx) + y)
-        cv2.line(frame, (cols - 1, right), (0, left), (0, 255, 0), 2)
+        if math.degrees(math.atan2(vy - y, vx - x)) > 45:
+            targets.append(contour)
 
+    for filtered_contour in filtered_contours:
         for target in targets:
             area = cv2.contourArea(contour)
             perimeter = cv2.arcLength(contour, True)
