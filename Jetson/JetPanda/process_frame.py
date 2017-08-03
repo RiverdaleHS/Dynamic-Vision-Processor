@@ -23,34 +23,40 @@ def process_frame(frame, low_range, high_range, targets):
     for contour in contours:
         # Eliminate small contours based on a fit line.  All targets should be level to the ground
         [vx, vy, x, y] = cv2.fitLine(contour, cv2.DIST_L2, 0, 0, 0.01, 0.01)
-        area = math.degrees(math.atan2(vy - y, vx - x))
         if math.degrees(math.atan2(vy - y, vx - x)) < -150:
             if cv2.contourArea(contour) > 50:
                 filtered_contours.append(contour)
 
 
-    for filtered_contour in filtered_contours:
-        for target in targets:
-            matches = []
-            perimeter = cv2.arcLength(contour, True)
-            area = cv2.contourArea(contour)
-            perimeter_over_area = perimeter/area
-            # 0.55 - 0.5 = 0.05
-            if (perimeter_over_area - target.perimeter_over_area) < target.perimeter_over_area_tolerence:
-                matches.append(filtered_contour)
+    for target in targets:
+        filtered_contours.sort(key=target.sorter)
+        for i in range(target.number_of_targets):
+            target.add_contour(filtered_contours[i])
 
-            if target.find_one:
-                # determine the best of the found targets
-                target.set_contours([matches[0]])
-            else:
-                target.set_contours(matches)
+
+
+    # for filtered_contour in filtered_contours:
+    #     for target in targets:
+    #         matches = []
+    #         perimeter = cv2.arcLength(contour, True)
+    #         area = cv2.contourArea(contour)
+    #         perimeter_over_area = perimeter/area
+    #
+    #         if (perimeter_over_area - target.perimeter_over_area) < target.perimeter_over_area_tolerence:
+    #             matches.append(filtered_contour)
+    #
+    #         if target.find_one:
+    #             # determine the best of the found targets
+    #             target.set_contours([matches[0]])
+    #         else:
+    #             target.set_contours(matches)
 
 
 
     cv2.drawContours(frame, contours, -1, (0, 0, 255), -1)
     cv2.drawContours(frame, filtered_contours, -1, (255, 0, 0), -1)
     for target in targets:
-        cv2.drawContours(frame, target.contours, -1, (0, 0, 255), -1)
+        cv2.drawContours(frame, target.contours, -1, (255, 50, 0), -1)
 
 
     cv2.imshow("frame", frame)

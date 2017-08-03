@@ -9,7 +9,8 @@ global_vars = {}
 # attempt to load commandline args and if they are not there correct the user
 try:
     config_file_path = sys.argv[1]
-    targets_folder = sys.argv[2]
+    target_script = sys.argv[2]
+    target_sorter = __import__(target_script)
     image_source = sys.argv[3]
 except:
     print("Usage: python3 __main__.py config_file_path camera_id_or_image_path")
@@ -68,7 +69,7 @@ if isInt(image_source):
             ret, raw_frame = camera.read()
             process_frame(raw_frame, (global_vars["min_hue"], global_vars["min_saturation"], global_vars["min_value"]),
                           (global_vars["max_hue"], global_vars["max_saturation"], global_vars["max_value"]),
-                          [target(0.5, 0.5, False)])  # PLACE HOLDERS
+                          [target(target_sorter, 1)])  # PLACE HOLDERS
         except Exception as e:
             print("Main Loop Failure!!!🤔")
             print(e)
