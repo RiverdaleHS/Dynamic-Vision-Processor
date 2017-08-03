@@ -9,8 +9,9 @@ global_vars = {}
 # attempt to load commandline args and if they are not there correct the user
 try:
     config_file_path = sys.argv[1]
-    target_script = sys.argv[2]
-    target_sorter = __import__(target_script)
+    target_sorter_arg = sys.argv[2]
+    #TODO: remvoe .py extention if it has one
+    target_sorter = __import__(target_sorter_arg)
     image_source = sys.argv[3]
 except:
     print("Usage: python3 __main__.py config_file_path camera_id_or_image_path")
