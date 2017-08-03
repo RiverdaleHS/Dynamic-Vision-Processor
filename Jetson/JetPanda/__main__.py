@@ -13,8 +13,9 @@ try:
     #TODO: remvoe .py extention if it has one
     target_sorter = __import__(target_sorter_arg)
     image_source = sys.argv[3]
-except:
+except Exception as e:
     print("Usage: python3 __main__.py config_file_path camera_id_or_image_path")
+    print("e")
     exit(-0)
 
 try:  # Load Config File
