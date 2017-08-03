@@ -5,13 +5,14 @@ from util import *
 from process_frame import *
 from target import *
 global_vars = {}
+from demo_target_sorter import demo_target_fitness
 
 # attempt to load commandline args and if they are not there correct the user
 try:
     config_file_path = sys.argv[1]
     target_sorter_arg = sys.argv[2]
     #TODO: remvoe .py extention if it has one
-    target_sorter = __import__(target_sorter_arg)
+    #target_sorter = __import__(target_sorter_arg)
     image_source = sys.argv[3]
 except Exception as e:
     print("Usage: python3 __main__.py config_file_path camera_id_or_image_path")
@@ -71,7 +72,7 @@ if isInt(image_source):
             ret, raw_frame = camera.read()
             process_frame(raw_frame, (global_vars["min_hue"], global_vars["min_saturation"], global_vars["min_value"]),
                           (global_vars["max_hue"], global_vars["max_saturation"], global_vars["max_value"]),
-                          [target(target_sorter, 1)])  # PLACE HOLDERS
+                          [target(demo_target_fitness, 1)])  # PLACE HOLDERS
         except Exception as e:
             print("Main Loop Failure!!!🤔")
             print(e)
@@ -85,9 +86,10 @@ else:
         try:
 
             raw_frame = cv2.imread(image_source)
+
             process_frame(raw_frame, (global_vars["min_hue"], global_vars["min_saturation"], global_vars["min_value"]),
                           (global_vars["max_hue"], global_vars["max_saturation"], global_vars["max_value"]),
-                          [target(0.5, 0.5, False)])  # PLACE HOLDERS
+                          [target(demo_target_fitness, 1)])  # PLACE HOLDERS
 
 
         except Exception as e:
