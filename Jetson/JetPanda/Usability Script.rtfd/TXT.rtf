@@ -1,0 +1,44 @@
+{\rtf1\ansi\ansicpg1252\cocoartf1504\cocoasubrtf830
+{\fonttbl\f0\fswiss\fcharset0 Helvetica;}
+{\colortbl;\red255\green255\blue255;}
+{\*\expandedcolortbl;;}
+\margl1440\margr1440\vieww18900\viewh19600\viewkind0
+\pard\tx720\tx1440\tx2160\tx2880\tx3600\tx4320\tx5040\tx5760\tx6480\tx7200\tx7920\tx8640\pardirnatural\partightenfactor0
+
+\f0\b\fs72 \cf0 \ul \ulc0 FRC Vision Processing Script:\
+
+\b0 \ulnone Each year there are normally vision targets in the First Robotics Competition.  The targets are used by robots to aim shooters and drive autonomously.\
+Here are some examples, with the targets highlighted in red
+\fs24 \
+\pard\tx560\tx1120\tx1680\tx2240\tx2800\tx3360\tx3920\tx4480\tx5040\tx5600\tx6160\tx6720\pardirnatural\partightenfactor0
+\cf0 {{\NeXTGraphic 47C9C9A3-8703-4932-8F49-A7B22AC726EF.png \width6400 \height4800
+}¬}{{\NeXTGraphic 5F8DC109-56A5-48DD-AC4C-CE926FFB8C6B.tiff \width12540 \height9040
+}¬}\
+{{\NeXTGraphic 426749B1-0A16-4E02-AC54-D19D942C4F08.jpeg \width21600 \height14400
+}¬}\
+
+\fs72 Since the shapes of the targets change each year, the program often has to be re-written, using valuable time.  The goal of this project is to create a program that only needs to be reconfigured.  The color of the targets changes depending on the camera and LED ring light used.  Because of this, the program reads from a configuration file what Hue, Saturation, and Value ranges the target is in.  It then creates a binary image with pixels that are in that range being 1 (white), and pixels that are not in the range 0 (black).  The program then finds chunks of pixels (contours), and removes small ones that are not likely to be targets.  Then, it runs a python function the user creates that choses the best target(s) out of the remaining contours.  It would then send that information to the robot so that the robot can act accordingly.\
+
+\b Steps\
+
+\b0 1. Open terminal in the ubuntu vm.\
+2. run the command 
+\b workon cv
+\b0 .  This activates the python environment.\
+3. run 
+\b cd Desktop/FFFF/Dynamic-Vision-Processing/Jetson/JetPanda
+\b0  to move to the programs directory\
+4. run the program with 
+\b python3 __main__.py config.txt placeholder testImages/testImage-2.png
+\b0 \
+note that the last argument can be replaced with an integer and the program will run using a camera, not just an image.  Images are easier for testing\
+5. The program will help you create a config.txt file.  You can type whatever you want for every question except for the threshold ones.  These are the correct threshold values for image2\
+min_hue 70\
+max_hue 180\
+min_saturation 0\
+max_saturation 255\
+min_value 180\
+max_value 255\
+6. The result is in the photo titled 
+\b frame
+\b0 .  the bright red pixels overlaid represent contours that the program decided are not likely to be targets.  The blue pixels represent contours the program thinks are targets.  The user then rights a script that choses the best target (or two for some games).  The target in bright blue is the one selected with the user-written script.}
