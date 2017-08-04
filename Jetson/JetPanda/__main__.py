@@ -31,7 +31,7 @@ except:
     # Camera USB Name
     cam_id = input("What is the USB ID of this Camera?")
     config_file.write("Camera_ID|" + cam_id + "\n")
-    # Focal Lenght
+    # Focal Length
     focal_length = input("What is the focal length of this camera?")
     config_file.write("Camera_Focal_Length|" + focal_length + "\n")
     # Height off of Ground

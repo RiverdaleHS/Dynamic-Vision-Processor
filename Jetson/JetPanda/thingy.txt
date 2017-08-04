@@ -1,0 +1,16 @@
+
+How to find the field of view:
+	cameraFieldOfView = 2*atan(0.5*imageWidth/focal_length)
+
+How to find the center of the image:
+	centerX = imageWidth / 2 - 0.5
+	centerY = imageHeight / 2 - 0.5
+
+Find the X and Y points: 
+	PointX = X/Z * focal_length + CenterX
+	PointY = Y/Z * focal_length + CenterY
+
+Find the angles:
+	angleHorizontal = atan(PointX-CenterX)/focal_length)
+	angleVertical = atan(PointY-CenterY)/focal_length)
+

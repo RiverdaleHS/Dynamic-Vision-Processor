@@ -3,7 +3,7 @@ import numpy as np
 import math
 
 
-def process_frame(frame, low_range, high_range, targets):
+def process_frame(frame, low_range, high_range, focal_length, targets):
     hsv = cv2.cvtColor(frame, cv2.COLOR_BGR2HSV)
     # Hue 0-180
     # Saturation 0-255
