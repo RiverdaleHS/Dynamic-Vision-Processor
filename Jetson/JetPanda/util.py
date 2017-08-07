@@ -49,7 +49,7 @@ def readTrackbar(window, name):
 
 
 def getHorizontalAngle(x, image_width, focal_lenght):
-    half_image_width_minus_one = (image_width - 0.5)/2
+    half_image_width_minus_one = (image_width - 1)/2
     radians = math.atan((x - half_image_width_minus_one )/ focal_lenght)
     return math.degrees(radians)
 
