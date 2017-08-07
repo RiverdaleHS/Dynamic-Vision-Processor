@@ -1,6 +1,6 @@
 import numpy as np
 import cv2
-import sys
+import sys, inspect
 from util import *
 from process_frame import *
 from target import *
@@ -10,13 +10,26 @@ from demo_target_sorter import demo_target_fitness
 # attempt to load commandline args and if they are not there correct the user
 try:
     config_file_path = sys.argv[1]
-    target_sorter_arg = sys.argv[2]
-    #TODO: remvoe .py extention if it has one
-    #target_sorter = __import__(target_sorter_arg)
+    target_file_path = sys.argv[2]
+    #remove .py extension if
+    target_file_name = target_file_path.split(".")[0]
+    target_functions_file = __import__(target_file_name)
+    all_fucntions_in_target_file = [f for f in inspect.getmembers(target_functions_file) if inspect.isfunction(f[1])]\
+
+    for function in all_fucntions_in_target_file:
+        print(__name__(function))
+        # for memeber in inspect.getmembers(function):
+        #     print(memeber)
+
+    # for func in all_fucntions_in_target_file:
+    #     print(inspect.getargvalues(func))
+
+    print(all_fucntions_in_target_file)
+
     image_source = sys.argv[3]
 except Exception as e:
     print("Usage: python3 __main__.py config_file_path camera_id_or_image_path")
-    print("e")
+    print(e)
     exit(-0)
 
 try:  # Load Config File
@@ -28,9 +41,6 @@ except:
     config_file = open(config_file_path, "w+")
     robot_hostname = input("What is the hostname of the RoboRIO?")
     config_file.write("RoboRIO_Hostname|" + robot_hostname + "\n")
-    # Camera USB Name
-    cam_id = input("What is the USB ID of this Camera?")
-    config_file.write("Camera_ID|" + cam_id + "\n")
     # Focal Lenght
     focal_length = input("What is the focal length of this camera?")
     config_file.write("Camera_Focal_Length|" + focal_length + "\n")
@@ -57,6 +67,9 @@ except:
         read_from_file(robot_file, global_vars)
 
 print("Successfully loaded config file " + config_file_path)
+
+
+
 
 # Print Dependency Versions
 print("Using OpenCV " + cv2.__version__)  # Print OpenCV Version
