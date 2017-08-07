@@ -48,12 +48,22 @@ def readTrackbar(window, name):
     pass
 
 
-def getHorizontalAngle(x, image_width, focal_lenght):
-    half_image_width_minus_one = (image_width - 1)/2
-    radians = math.atan((x - half_image_width_minus_one )/ focal_lenght)
-    return math.degrees(radians)
+def getHorizontalAngle(x, image_width, focal_length):
+    image_width_center = (image_width - 1)/2
+    radians_yaw = math.atan((x - image_width_center )/ focal_length)
+    degrees_yaw = math.degrees(radians_yaw)
+    return degrees_yaw
 
+def getVerticalAngle(y, image_height, focal_length):
+    image_height_center = (image_height - 1)/2
+    radians_pitch = math.atan((y - image_height_center )/ focal_length)
+    degrees_pitch = math.degrees(radians_pitch)
+    return degrees_pitch
 
+def getDistanceToTarget(target_height, camera_height, degrees_pitch): #Camera pitch is assumed to be 90°
+    height_differential = math.fabs(target_height - camera_height)
+
+    return degrees_pitch, height_differential
 
 def createHSVThreasholdTrackbars(output_dict):
     cv2.namedWindow("HSV_Range")
@@ -73,5 +83,10 @@ def createHSVThreasholdTrackbars(output_dict):
 def setTrackbarPosition(window, name, position):
     cv2.setTrackbarPos(window, name, position)
 
+degrees_yaw = (getHorizontalAngle(45, 640, 554.3))
+degrees_pitch = (getVerticalAngle(250, 480, 554.3))
 
-print(getHorizontalAngle(45, 640, 554.3))
+print(degrees_yaw)
+print(degrees_pitch)
+
+print(getDistanceToTarget(10, 13, degrees_pitch))
