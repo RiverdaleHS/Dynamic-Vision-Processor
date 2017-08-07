@@ -87,8 +87,3 @@ def setTrackbarPosition(window, name, position):
 
 degrees_yaw = (getHorizontalAngle(45, 640, 554.3))
 degrees_pitch = (getVerticalAngle(250, 480, 554.3))
-
-print(degrees_yaw)
-print(degrees_pitch)
-
-print(getDistanceToTarget(3.5, 8, degrees_pitch))
