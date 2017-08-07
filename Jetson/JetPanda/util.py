@@ -48,6 +48,7 @@ def readTrackbar(window, name):
     pass
 
 
+
 def getHorizontalAngle(x, image_width, focal_length):
     image_width_center = (image_width - 1)/2
     radians_yaw = math.atan((x - image_width_center )/ focal_length)
@@ -62,8 +63,9 @@ def getVerticalAngle(y, image_height, focal_length):
 
 def getDistanceToTarget(target_height, camera_height, degrees_pitch): #Camera pitch is assumed to be 90°
     height_differential = math.fabs(target_height - camera_height)
+    distance_to_target = height_differential * math.tan(degrees_pitch)
 
-    return degrees_pitch, height_differential
+    return distance_to_target
 
 def createHSVThreasholdTrackbars(output_dict):
     cv2.namedWindow("HSV_Range")
@@ -89,4 +91,4 @@ degrees_pitch = (getVerticalAngle(250, 480, 554.3))
 print(degrees_yaw)
 print(degrees_pitch)
 
-print(getDistanceToTarget(10, 13, degrees_pitch))
+print(getDistanceToTarget(3.5, 8, degrees_pitch))
