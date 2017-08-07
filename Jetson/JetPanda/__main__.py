@@ -105,7 +105,7 @@ else:
             raw_frame = cv2.imread(image_source)
 
             process_frame(raw_frame, (global_vars["min_hue"], global_vars["min_saturation"], global_vars["min_value"]),
-                          (global_vars["max_hue"], global_vars["max_saturation"], global_vars["max_value"]),
+                          (global_vars["max_hue"], global_vars["max_saturation"], global_vars["max_value"]), global_vars["Camera_Focal_Length"],
                           global_vars["targets"])  # PLACE HOLDERS
 
 
