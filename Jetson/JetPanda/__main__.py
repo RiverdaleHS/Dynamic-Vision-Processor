@@ -1,11 +1,6 @@
 import numpy as np
 import cv2
-<<<<<<< HEAD
 import sys, inspect
-=======
-import sys
-import math
->>>>>>> dc94f999bed99ebf16cd392e81a52fba602dda38
 from util import *
 from process_frame import *
 from target import *
