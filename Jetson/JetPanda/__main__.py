@@ -24,12 +24,6 @@ try:
         for func_name in target_function_names:
             if function[0] == func_name:
                 global_vars["targets"].append(target(function[1], function[1](None)))
-        # for memeber in inspect.getmembers(function):
-        #     print(memeber)
-
-    # for func in all_fucntions_in_target_file:
-    #     print(inspect.getargvalues(func))
-
 
     image_source = sys.argv[3]
 except Exception as e:
