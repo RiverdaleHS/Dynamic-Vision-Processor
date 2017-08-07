@@ -1,0 +1,24 @@
+
+How to find the field of view:
+	cameraFieldOfView = 2*atan(0.5*imageWidth/focal_length)
+
+How to find the center of the image:
+	centerX = imageWidth / 2 - 0.5
+	centerY = imageHeight / 2 - 0.5
+
+Find the X and Y points: 
+	pointX = X/Z * focal_length + centerX
+	pointY = Y/Z * focal_length + centerY
+
+Find the angles:
+	angleHorizontal = atan(pointX-CenterX)/focal_length)
+	angleVertical = atan(pointY-CenterY)/focal_length)
+
+
+
+##################
+
+    pointX = X / Z * focal_length + centerX
+    pointY = Y / Z * focal_length + centerY
+    angleHorizontal = math.atan((pointX-CenterX)/focal_length)
+    angleVertical = math.atan((pointY-CenterY)/focal_length)

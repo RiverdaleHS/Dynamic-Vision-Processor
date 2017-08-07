@@ -1,6 +1,6 @@
 import cv2
 from target import *
-
+import math
 
 # loads config file
 def read_from_file(file, output_dict):
@@ -48,6 +48,13 @@ def readTrackbar(window, name):
     pass
 
 
+def getHorizontalAngle(x, image_width, focal_lenght):
+    half_image_width_minus_one = (image_width - 1)/2
+    radians = math.atan((x - half_image_width_minus_one )/ focal_lenght)
+    return math.degrees(radians)
+
+
+
 def createHSVThreasholdTrackbars(output_dict):
     cv2.namedWindow("HSV_Range")
     createTrackbar("HSV_Range", "min_hue", 0, 180)
@@ -65,3 +72,6 @@ def createHSVThreasholdTrackbars(output_dict):
 
 def setTrackbarPosition(window, name, position):
     cv2.setTrackbarPos(window, name, position)
+
+
+print(getHorizontalAngle(45, 640, 554.3))

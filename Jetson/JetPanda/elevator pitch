@@ -1,0 +1,6 @@
+Our project is intended to make vision processing easier for FRC teams. 
+Traditionally, not all FRC teams have the resources necessary to allocate a programmer to just vision processing.
+Our final product will require minimal configuration: all it needs is the constraints for camera,
+such as lens distortion and a 2-3 line Python file to define the target.
+Then, our program will do the rest of the work. 
+It will recognize the targets they specified in the configuration file, and calculated the distance to them

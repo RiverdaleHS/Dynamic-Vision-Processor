@@ -1,6 +1,11 @@
 import numpy as np
 import cv2
+<<<<<<< HEAD
 import sys, inspect
+=======
+import sys
+import math
+>>>>>>> dc94f999bed99ebf16cd392e81a52fba602dda38
 from util import *
 from process_frame import *
 from target import *
@@ -39,9 +44,13 @@ except:
     print("Could not find config file " + config_file_path)
     print("Creating file " + config_file_path)
     config_file = open(config_file_path, "w+")
+    #Define variables necessary for angle calculation
+    imageWidth, imageHeight = cv.GetSize(src)
+    centerX = imageWidth / 2 - 0.5
+    centerY = imageHeight / 2 - 0.5
+    #Robot Hostname
     robot_hostname = input("What is the hostname of the RoboRIO?")
     config_file.write("RoboRIO_Hostname|" + robot_hostname + "\n")
-    # Focal Lenght
     focal_length = input("What is the focal length of this camera?")
     config_file.write("Camera_Focal_Length|" + focal_length + "\n")
     # Height off of Ground
