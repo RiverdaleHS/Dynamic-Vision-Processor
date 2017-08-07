@@ -17,7 +17,7 @@ try:
     all_fucntions_in_target_file = [f for f in inspect.getmembers(target_functions_file) if inspect.isfunction(f[1])]\
 
     for function in all_fucntions_in_target_file:
-        print(__name__(function))
+        print(function[0])
         # for memeber in inspect.getmembers(function):
         #     print(memeber)
 
@@ -39,10 +39,6 @@ except:
     print("Could not find config file " + config_file_path)
     print("Creating file " + config_file_path)
     config_file = open(config_file_path, "w+")
-    #Define variables necessary for angle calculation
-    imageWidth, imageHeight = cv.GetSize(src)
-    centerX = imageWidth / 2 - 0.5
-    centerY = imageHeight / 2 - 0.5
     #Robot Hostname
     robot_hostname = input("What is the hostname of the RoboRIO?")
     config_file.write("RoboRIO_Hostname|" + robot_hostname + "\n")
@@ -65,6 +61,7 @@ except:
     config_file.write("max_saturation|" + max_saturation + "\n")
     config_file.write("min_value|" + min_value + "\n")
     config_file.write("max_value|" + max_value + "\n")
+    print("")
 
     config_file.close()
     with open(config_file_path) as robot_file:
