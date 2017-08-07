@@ -7,6 +7,10 @@ from target import *
 global_vars = {}
 from demo_target_sorter import demo_target_fitness
 
+# THE ONE THING YOU NEED TO CONFIGURE!!!
+target_function_names = ["demo_target_fitness"]
+global_vars["targets"] = []
+
 # attempt to load commandline args and if they are not there correct the user
 try:
     config_file_path = sys.argv[1]
@@ -17,14 +21,15 @@ try:
     all_fucntions_in_target_file = [f for f in inspect.getmembers(target_functions_file) if inspect.isfunction(f[1])]\
 
     for function in all_fucntions_in_target_file:
-        print(function[0])
+        for func_name in target_function_names:
+            if function[0] == func_name:
+                global_vars["targets"].append(target(function[0], function[1](None)))
         # for memeber in inspect.getmembers(function):
         #     print(memeber)
 
     # for func in all_fucntions_in_target_file:
     #     print(inspect.getargvalues(func))
 
-    print(all_fucntions_in_target_file)
 
     image_source = sys.argv[3]
 except Exception as e:
@@ -61,8 +66,6 @@ except:
     config_file.write("max_saturation|" + max_saturation + "\n")
     config_file.write("min_value|" + min_value + "\n")
     config_file.write("max_value|" + max_value + "\n")
-    print("")
-
     config_file.close()
     with open(config_file_path) as robot_file:
         read_from_file(robot_file, global_vars)
@@ -103,7 +106,7 @@ else:
 
             process_frame(raw_frame, (global_vars["min_hue"], global_vars["min_saturation"], global_vars["min_value"]),
                           (global_vars["max_hue"], global_vars["max_saturation"], global_vars["max_value"]),
-                          [target(demo_target_fitness, 1)])  # PLACE HOLDERS
+                          global_vars["targets"])  # PLACE HOLDERS
 
 
         except Exception as e:
