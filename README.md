@@ -6,6 +6,6 @@ This program detects targets like these ones...
 
 Makes them look more like this using an HSV to binary filter
 
-![Targets 2](/Jetson/JetPanda/testImages/testImage-3.png?raw=true)
+![Targets 2](/Jetson/JetPanda/testImages/testImage-4.png?raw=true)
 
 and then identifies the targets that meet the specifications set in the configuration file.
