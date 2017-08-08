@@ -15,3 +15,5 @@ Then, we identify the targets that meet the specifications set in the configurat
 And we record the locations of those targets.
 
 Using the location, we are able to get the yaw of the robot relative to the target and the distance from the target to the robot.
+
+![Targets 4](/demoImage-3.png?raw=true)
