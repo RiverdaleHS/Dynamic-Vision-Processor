@@ -6,11 +6,11 @@ This program detects targets like these ones...
 
 Makes them look more like this using an HSV to binary filter
 
-![Targets 2](/demoImage-1.jpg?raw=true)
+![Targets 2](/demoImage-1.png?raw=true)
 
 Then, we identify the targets that meet the specifications set in the configuration file.
 
-![Targets 3](/demoImage-2.jpg?raw=true)
+![Targets 3](/demoImage-2.png?raw=true)
 
 And we record the locations of those targets.
 
