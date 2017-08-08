@@ -21,12 +21,14 @@ def process_frame(frame, low_range, high_range, focal_length, targets):
         contours.sort(key=target.sorter)
         for i in range(target.number_of_targets):
             target.add_contour(contours[i])
+        xs = 0
+        ys = 0
+        for cnt in target.contours:
+            M = cv2.moments(cnt)
+            xs += int(M['m10']/M['m00'])
+            ys += int(M['m01'] / M['m00'])
+        x = xs / target.contours.count()
+        y = ys / target.contours.count()
+        target.set_point(x, y)
 
-    cv2.drawContours(frame, contours, -1, (255, 0, 0), -1)
-    for target in targets:
-        cv2.drawContours(frame, target.contours, -1, (255, 50, 0), -1)
-
-    cv2.imshow("frame", frame)
-    cv2.imshow("binary", binary)
-    cv2.imshow("erode binary", erode_binary)
-    cv2.imshow("open binary", open_binary)
+    return targets

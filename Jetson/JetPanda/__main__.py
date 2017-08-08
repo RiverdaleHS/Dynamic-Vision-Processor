@@ -81,9 +81,11 @@ if isInt(image_source):
     while True:
         try:
             ret, raw_frame = camera.read()
-            process_frame(raw_frame, (global_vars["min_hue"], global_vars["min_saturation"], global_vars["min_value"]),
-                          (global_vars["max_hue"], global_vars["max_saturation"], global_vars["max_value"]),
-                          [target(demo_target_fitness, 1)])  # PLACE HOLDERS
+            returned_targets = process_frame(raw_frame, (
+            global_vars["min_hue"], global_vars["min_saturation"], global_vars["min_value"]),
+                                             (global_vars["max_hue"], global_vars["max_saturation"],
+                                              global_vars["max_value"]), global_vars["Camera_Focal_Length"],
+                                             global_vars["targets"])
         except Exception as e:
             print("Main Loop Failure!!!🤔")
             print(e)
@@ -93,20 +95,18 @@ if isInt(image_source):
 else:
     # Load one image and display in loop
     print("Loading Image " + image_source)
+    try:
+        raw_frame = cv2.imread(image_source)
+        returned_targets = process_frame(raw_frame,
+                                     (global_vars["min_hue"], global_vars["min_saturation"], global_vars["min_value"]),
+                                     (global_vars["max_hue"], global_vars["max_saturation"], global_vars["max_value"]),
+                                     global_vars["Camera_Focal_Length"],
+                                     global_vars["targets"])
+    except Exception as e:
+        print("Failed to Load Image!!!🤔")
+        print(e)
     while True:
-        try:
-
-            raw_frame = cv2.imread(image_source)
-
-            process_frame(raw_frame, (global_vars["min_hue"], global_vars["min_saturation"], global_vars["min_value"]),
-                          (global_vars["max_hue"], global_vars["max_saturation"], global_vars["max_value"]), global_vars["Camera_Focal_Length"],
-                          global_vars["targets"])  # PLACE HOLDERS
-
-
-        except Exception as e:
-            print("Failed to Load Image!!!🤔")
-            print(e)
-            break
+        cv2.imshow("frame", raw_frame)
         if cv2.waitKey(1) == 27:
             break
 cv2.destroyAllWindows()

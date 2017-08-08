@@ -14,20 +14,6 @@ def read_from_file(file, output_dict):
         else:
             output_dict[name_of_constant] = constant
 
-# returns an array of target objects with all of the needed info
-# def read_from_targets_file(file):
-#     targets = []
-#     lines = file.readlines()
-#     for line in lines:
-#         data = line.split("|")
-#         file_path = data[0]
-#         function_name = data[1]
-#         number_of_targets_wanted = data[2]
-#
-#         targets.append(target())
-#     return target_file_paths
-
-
 def isInt(string):
     try:
         int(string)
