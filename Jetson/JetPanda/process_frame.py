@@ -27,8 +27,8 @@ def process_frame(frame, low_range, high_range, focal_length, targets):
             M = cv2.moments(cnt)
             xs += int(M['m10']/M['m00'])
             ys += int(M['m01'] / M['m00'])
-        x = xs / target.contours.count()
-        y = ys / target.contours.count()
+        x = xs / len(target.contours)
+        y = ys / len(target.contours)
         target.set_point(x, y)
 
     return targets
