@@ -2,7 +2,7 @@ RoboRIO_Hostname|133
 Camera_ID|41
 Camera_Focal_Length|33
 Camera_Ground_Height|34
-min_hue|70
+min_hue|0
 max_hue|180
 min_saturation|0
 max_saturation|255
