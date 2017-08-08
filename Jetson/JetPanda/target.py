@@ -1,4 +1,5 @@
-class target:
+
+class Target:
     sorter = None
     contours = []
     number_of_targets = 1
