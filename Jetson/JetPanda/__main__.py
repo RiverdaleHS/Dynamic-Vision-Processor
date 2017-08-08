@@ -81,11 +81,16 @@ if isInt(image_source):
     while True:
         try:
             ret, raw_frame = camera.read()
-            returned_targets = process_frame(raw_frame, (
-            global_vars["min_hue"], global_vars["min_saturation"], global_vars["min_value"]),
+            returned_targets = process_frame(raw_frame,
+                                             (global_vars["min_hue"], global_vars["min_saturation"],
+                                              global_vars["min_value"]),
                                              (global_vars["max_hue"], global_vars["max_saturation"],
-                                              global_vars["max_value"]), global_vars["Camera_Focal_Length"],
+                                              global_vars["max_value"]),
+                                             global_vars["Camera_Focal_Length"],
                                              global_vars["targets"])
+            for rt in returned_targets:
+                cv2.drawContours(raw_frame, rt.contours, -1, (0, 0, 255), -1)
+                cv2.circle(raw_frame, (int(rt.x), int(rt.y)), 0, (37, 228, 249), 10)
         except Exception as e:
             print("Main Loop Failure!!!🤔")
             print(e)
@@ -105,6 +110,9 @@ else:
         for rt in returned_targets:
             cv2.drawContours(raw_frame, rt.contours, -1, (0, 0, 255), -1)
             cv2.circle(raw_frame, (int(rt.x), int(rt.y)), 0, (37, 228, 249), 10)
+            angle_info = "Angle: " + getHorizontalAngle(rt.x, 640, 40)
+
+            cv2.putText(raw_frame, angle_info, (int(rt.x), int(rt.y)), cv2.FONT_HERSHEY_SIMPLEX, 4, (255, 255, 255), 2, cv2.LINE_AA)
     except Exception as e:
         print("Failed to Load Image!!!🤔")
         print(e)
