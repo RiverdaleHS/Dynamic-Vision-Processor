@@ -111,8 +111,12 @@ else:
             cv2.drawContours(raw_frame, rt.contours, -1, (0, 0, 255), -1)
             cv2.circle(raw_frame, (int(rt.x), int(rt.y)), 0, (37, 228, 249), 10)
             angle_info = "Angle: " + getHorizontalAngle(rt.x, 640, 40)
+            distance_info = "Distance: " + getDistanceToTarget(3, 1, getVerticalAngle(y, 480, 40))
 
             cv2.putText(raw_frame, angle_info, (int(rt.x), int(rt.y)), cv2.FONT_HERSHEY_SIMPLEX, 4, (255, 255, 255), 2, cv2.LINE_AA)
+            cv2.putText(raw_frame, distance_info, (int(0), int(0)), cv2.FONT_HERSHEY_SIMPLEX, 4, (255, 255, 255), 2,
+                        cv2.LINE_AA)
+
     except Exception as e:
         print("Failed to Load Image!!!🤔")
         print(e)
