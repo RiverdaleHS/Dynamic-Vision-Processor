@@ -23,7 +23,7 @@ try:
     for function in all_fucntions_in_target_file:
         for func_name in target_function_names:
             if function[0] == func_name:
-                global_vars["targets"].append(Target(function[1], function[1](None)))
+                global_vars["targets"].append(Target(function[1], function[1]([])))
 
     image_source = sys.argv[3]
 except Exception as e:
