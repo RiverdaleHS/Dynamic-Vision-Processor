@@ -12,8 +12,10 @@ Then, we identify the targets that meet the specifications set in the configurat
 
 ![Targets 3](/demoImage-2.png?raw=true)
 
-And we record the locations of those targets.
-
-Using the location, we are able to get the yaw of the robot relative to the target and the distance from the target to the robot.
+This is how the robot sees the targets:
 
 ![Targets 4](/demoImage-3.png?raw=true)
+
+We record the X & Y locations of those targets within the camera's field of view.
+
+Using this location, we are able to get the yaw of the robot relative to the target and the distance from the target to the robot.
