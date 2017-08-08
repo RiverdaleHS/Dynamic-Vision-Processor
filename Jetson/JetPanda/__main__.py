@@ -110,13 +110,9 @@ else:
         for rt in returned_targets:
             cv2.drawContours(raw_frame, rt.contours, -1, (0, 0, 255), -1)
             cv2.circle(raw_frame, (int(rt.x), int(rt.y)), 0, (37, 228, 249), 10)
-            angle_info = "Angle: " + str(getHorizontalAngle(rt.x, 640, 40))
-            print("virt angle: " + str(getVerticalAngle(rt.y, 480, 40)))
-            distance_info = "Distance: " + str(getDistanceToTarget(3, 1, getVerticalAngle(rt.y, 480, 40)))
-
+            width, height = cv2.GetSize(raw_frame)
+            angle_info = "Angle: " + str(getHorizontalAngle(rt.x, width, 40))
             cv2.putText(raw_frame, angle_info, (int(rt.x), int(rt.y)), cv2.FONT_HERSHEY_SIMPLEX, 1, (255, 255, 255), 2, cv2.LINE_AA)
-            cv2.putText(raw_frame, distance_info, (int(0), int(100)), cv2.FONT_HERSHEY_SIMPLEX, 1, (255, 255, 255), 2,
-                        cv2.LINE_AA)
 
     except Exception as e:
         print("Failed to Load Image!!!🤔")
