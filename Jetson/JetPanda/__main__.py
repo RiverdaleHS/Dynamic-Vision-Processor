@@ -113,8 +113,8 @@ else:
             angle_info = "Angle: " + str(getHorizontalAngle(rt.x, 640, 40))
             distance_info = "Distance: " + str(getDistanceToTarget(3, 1, getVerticalAngle(rt.y, 480, 40)))
 
-            cv2.putText(raw_frame, angle_info, (int(rt.x), int(rt.y)), cv2.FONT_HERSHEY_SIMPLEX, 4, (255, 255, 255), 2, cv2.LINE_AA)
-            cv2.putText(raw_frame, distance_info, (int(0), int(0)), cv2.FONT_HERSHEY_SIMPLEX, 4, (255, 255, 255), 2,
+            cv2.putText(raw_frame, angle_info, (int(rt.x), int(rt.y)), cv2.FONT_HERSHEY_SIMPLEX, 1, (255, 255, 255), 2, cv2.LINE_AA)
+            cv2.putText(raw_frame, distance_info, (int(0), int(100)), cv2.FONT_HERSHEY_SIMPLEX, 1, (255, 255, 255), 2,
                         cv2.LINE_AA)
 
     except Exception as e:
