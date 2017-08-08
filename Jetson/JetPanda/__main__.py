@@ -104,7 +104,7 @@ else:
                                      global_vars["targets"])
         for rt in returned_targets:
             cv2.drawContours(raw_frame, rt.contours, -1, (0, 0, 255), -1)
-            cv2.circle(raw_frame, (rt.x, rt.y), 10, (255, 0, 0))
+            cv2.circle(raw_frame, (rt.x, rt.y), 5, (37, 228, 249), 10)
     except Exception as e:
         print("Failed to Load Image!!!🤔")
         print(e)
