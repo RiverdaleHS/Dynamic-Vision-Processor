@@ -14,8 +14,8 @@ def process_frame(frame, low_range, high_range, focal_length, targets):
 
     erode_binary = cv2.erode(binary, np.ones((4, 4), np.uint8), iterations=1)
     open_binary = cv2.dilate(erode_binary, np.ones((4, 4), np.uint8), iterations=4)
-
-    _, contours, hierarchy = cv2.findContours(open_binary, cv2.RETR_TREE, cv2.CHAIN_APPROX_SIMPLE)
+    binary_for_calc = open_binary
+    _, contours, hierarchy = cv2.findContours(binary_for_calc, cv2.RETR_TREE, cv2.CHAIN_APPROX_SIMPLE)
 
     for target in targets:
         contours.sort(key=target.sorter)
