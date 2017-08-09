@@ -81,7 +81,7 @@ if isInt(image_source):
     while True:
         try:
             ret, raw_frame = camera.read()
-            returned_targets = process_frame(raw_frame,
+            returned_targets, binary = process_frame(raw_frame,
                                              (global_vars["min_hue"], global_vars["min_saturation"],
                                               global_vars["min_value"]),
                                              (global_vars["max_hue"], global_vars["max_saturation"],
@@ -91,6 +91,8 @@ if isInt(image_source):
             for rt in returned_targets:
                 cv2.drawContours(raw_frame, rt.contours, -1, (0, 0, 255), -1)
                 cv2.circle(raw_frame, (int(rt.x), int(rt.y)), 0, (37, 228, 249), 10)
+            cv2.imshow("frame", raw_frame)
+            cv2.imshow("binary", binary)
         except Exception as e:
             print("Main Loop Failure!!!🤔")
             print(e)
@@ -102,7 +104,7 @@ else:
     print("Loading Image " + image_source)
     try:
         raw_frame = cv2.imread(image_source)
-        returned_targets = process_frame(raw_frame,
+        returned_targets, binary = process_frame(raw_frame,
                                      (global_vars["min_hue"], global_vars["min_saturation"], global_vars["min_value"]),
                                      (global_vars["max_hue"], global_vars["max_saturation"], global_vars["max_value"]),
                                      global_vars["Camera_Focal_Length"],
@@ -119,6 +121,7 @@ else:
         print(e)
     while True:
         cv2.imshow("frame", raw_frame)
+        cv2.imshow("binary", binary)
         if cv2.waitKey(1) == 27:
             break
 cv2.destroyAllWindows()
