@@ -31,4 +31,4 @@ def process_frame(frame, low_range, high_range, focal_length, targets):
         y = ys / len(target.contours)
         target.set_point(x, y)
 
-    return targets
+    return targets, binary
