@@ -4,12 +4,17 @@ import sys, inspect
 from util import *
 from process_frame import *
 from target import *
+from threading import Thread
+from networktables import NetworkTables
+
 global_vars = {}
 from demo_target_sorter import demo_target_fitness
 
 # THE ONE THING YOU NEED TO CONFIGURE!!!
 target_function_names = ["demo_target_fitness"]
 global_vars["targets"] = []
+
+angle_to_target = 0
 
 # attempt to load commandline args and if they are not there correct the user
 try:
@@ -68,62 +73,85 @@ print("Successfully loaded config file " + config_file_path)
 
 
 
-
-# Print Dependency Versions
-print("Using OpenCV " + cv2.__version__)  # Print OpenCV Version
-
-
-if isInt(image_source):
-    image_source = int(image_source)
-    # Camera Loop!
-    print("Loading Camera " + str(image_source))
-    camera = cv2.VideoCapture(image_source)
-    while True:
+def vision():
+    global image_source, e
+    # Print Dependency Versions
+    print("Using OpenCV " + cv2.__version__)  # Print OpenCV Version
+    if isInt(image_source):
+        image_source = int(image_source)
+        # Camera Loop!
+        print("Loading Camera " + str(image_source))
+        camera = cv2.VideoCapture(image_source)
+        while True:
+            try:
+                ret, raw_frame = camera.read()
+                returned_targets, binary, open_binary = process_frame(raw_frame,
+                                                                      (global_vars["min_hue"],
+                                                                       global_vars["min_saturation"],
+                                                                       global_vars["min_value"]),
+                                                                      (global_vars["max_hue"],
+                                                                       global_vars["max_saturation"],
+                                                                       global_vars["max_value"]),
+                                                                      global_vars["Camera_Focal_Length"],
+                                                                      global_vars["targets"])
+                for rt in returned_targets:
+                    cv2.drawContours(raw_frame, rt.contours, -1, (0, 0, 255), -1)
+                    cv2.circle(raw_frame, (int(rt.x), int(rt.y)), 0, (37, 228, 249), 10)
+                cv2.imshow("frame", raw_frame)
+                cv2.imshow("binary", binary)
+                cv2.imshow("open_binary", open_binary)
+            except Exception as e:
+                print("Main Loop Failure!!!🤔")
+                print(e)
+            if cv2.waitKey(1) == 27:
+                camera.release()
+                break
+    else:
+        # Load one image and display in loop
+        print("Loading Image " + image_source)
         try:
-            ret, raw_frame = camera.read()
+            raw_frame = cv2.imread(image_source)
             returned_targets, binary, open_binary = process_frame(raw_frame,
-                                             (global_vars["min_hue"], global_vars["min_saturation"],
-                                              global_vars["min_value"]),
-                                             (global_vars["max_hue"], global_vars["max_saturation"],
-                                              global_vars["max_value"]),
-                                             global_vars["Camera_Focal_Length"],
-                                             global_vars["targets"])
+                                                                  (
+                                                                  global_vars["min_hue"], global_vars["min_saturation"],
+                                                                  global_vars["min_value"]),
+                                                                  (
+                                                                  global_vars["max_hue"], global_vars["max_saturation"],
+                                                                  global_vars["max_value"]),
+                                                                  global_vars["Camera_Focal_Length"],
+                                                                  global_vars["targets"])
             for rt in returned_targets:
                 cv2.drawContours(raw_frame, rt.contours, -1, (0, 0, 255), -1)
                 cv2.circle(raw_frame, (int(rt.x), int(rt.y)), 0, (37, 228, 249), 10)
+                width, height = raw_frame.shape[:2]
+                angle_to_target = getHorizontalAngle(rt.x, width, global_vars["Camera_Focal_Length"])
+                angle_info = "Angle: " + str(angle_to_target)
+                cv2.putText(raw_frame, angle_info, (int(rt.x), int(rt.y)), cv2.FONT_HERSHEY_SIMPLEX, 1, (255, 255, 255),
+                            2, cv2.LINE_AA)
+
+        except Exception as e:
+            print("Failed to Load Image!!!🤔")
+            print(e)
+        while True:
             cv2.imshow("frame", raw_frame)
             cv2.imshow("binary", binary)
             cv2.imshow("open_binary", open_binary)
-        except Exception as e:
-            print("Main Loop Failure!!!🤔")
-            print(e)
-        if cv2.waitKey(1) == 27:
-            camera.release()
-            break
-else:
-    # Load one image and display in loop
-    print("Loading Image " + image_source)
-    try:
-        raw_frame = cv2.imread(image_source)
-        returned_targets, binary, open_binary = process_frame(raw_frame,
-                                     (global_vars["min_hue"], global_vars["min_saturation"], global_vars["min_value"]),
-                                     (global_vars["max_hue"], global_vars["max_saturation"], global_vars["max_value"]),
-                                     global_vars["Camera_Focal_Length"],
-                                     global_vars["targets"])
-        for rt in returned_targets:
-            cv2.drawContours(raw_frame, rt.contours, -1, (0, 0, 255), -1)
-            cv2.circle(raw_frame, (int(rt.x), int(rt.y)), 0, (37, 228, 249), 10)
-            width, height = raw_frame.shape[:2]
-            angle_info = "Angle: " + str(getHorizontalAngle(rt.x, width, global_vars["Camera_Focal_Length"]))
-            cv2.putText(raw_frame, angle_info, (int(rt.x), int(rt.y)), cv2.FONT_HERSHEY_SIMPLEX, 1, (255, 255, 255), 2, cv2.LINE_AA)
+            if cv2.waitKey(1) == 27:
+                break
+    cv2.destroyAllWindows()
 
-    except Exception as e:
-        print("Failed to Load Image!!!🤔")
-        print(e)
+
+def network():
+    NetworkTables.initialize(server="10.29.15.100")
+    sd = NetworkTables.getTable("SmartDashboard")
     while True:
-        cv2.imshow("frame", raw_frame)
-        cv2.imshow("binary", binary)
-        cv2.imshow("open_binary", open_binary)
-        if cv2.waitKey(1) == 27:
-            break
-cv2.destroyAllWindows()
+        sd.putNumber("Angle", angle_to_target)
+
+vision_thread = Thread(vision())
+network_thread = Thread(network())
+
+vision_thread.start()
+network_thread.start()
+
+vision_thread.join()
+network_thread.join()
